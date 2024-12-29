@@ -8,11 +8,12 @@ const connectToDB = async ()=>{
             throw new Error("Mongo URL Not present");
         }
 
-        await mongoose.connect(URL,{
-            dbName: "uber-test-local"
-        },{
+        // await mongoose.connect(URL,{
+        //     dbName: "uber-test-local"
+        // },{
 
-        })
+        // })
+        await mongoose.connect(URL)
         console.log("SuccessFully Connected Mongo DB!")
 
     } catch (error) {

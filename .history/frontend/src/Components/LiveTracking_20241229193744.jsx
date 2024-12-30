@@ -11,7 +11,7 @@ const center = {
     lng: -38.523
 };
 
-const LiveTracking = ({rideDetails}) => {
+const LiveTracking = () => {
     const [ currentPosition, setCurrentPosition ] = useState(center);
     const [directions,setDirections] = useState(null)
 
@@ -54,24 +54,6 @@ const LiveTracking = ({rideDetails}) => {
 
     }, []);
 
-    useEffect(()=>{
-        if(rideDetails){
-            const directionsService = new google.maps.DirectionsService();
-            directionsService.route({
-                origin:rideDetails.pickup,
-                destination:rideDetails.destination,
-                travelMode:google.maps.TravelMode.DRIVING
-            }),
-            (result,status)=>{
-                if(status===google.maps.DirectionsStatus.OK){
-                    setDirections(result)
-                }else{
-                    console.error(`error fetching directions ${result}`)
-                }
-            }
-        }
-    },[rideDetails])
-
     return (
         <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API}>
             <GoogleMap
@@ -80,7 +62,7 @@ const LiveTracking = ({rideDetails}) => {
                 zoom={15}
                 options={false}
             >
-                {directions && <DirectionsRenderer directions={directions} />}
+                <Marker position={currentPosition} />
             </GoogleMap>
         </LoadScript>
     )

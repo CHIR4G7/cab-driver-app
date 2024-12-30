@@ -31,6 +31,7 @@ const UserLogin = () => {
 
       setTimeout(()=>{
         setError(false);
+        
         navigate('/user-home');
       },2000)
       toast('Logged In Successfully!')

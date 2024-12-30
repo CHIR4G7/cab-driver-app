@@ -4,7 +4,6 @@ import { SocketContext } from '../context/SocketContext'
 import {UserDataContext} from '../context/UserContext'
 import { apiRoutes } from '../utils/constants'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 const RideStart = ({ride}) => {
 
@@ -36,12 +35,12 @@ const RideStart = ({ride}) => {
           },
           withCredentials:true
         })
-        setFinishRide((prev)=>!prev)
+        na
       } catch (error) {
         console.log(error)
       throw new Error(error)
       }
-     
+      setFinishRide((prev)=>!prev)
     }
   
   return (

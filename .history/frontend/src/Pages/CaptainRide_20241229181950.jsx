@@ -9,19 +9,13 @@ import { apiRoutes } from '../utils/constants';
 import { RideDataContext } from '../context/RideContext'
 import axios from 'axios'
 import LiveTracking from '../Components/LiveTracking'
-import { SocketContext } from '../context/SocketContext'
 
 const CaptainRide = () => {
 
   const { id } = useParams()
   const { captain } = useContext(CaptainDataContext)
   const {confirmRideCaptain,setConfirmRideCaptain,rideStarted,setRideStarted,finishRide,setFinishRide} = useContext(RideDataContext)
-  const {socket} = useContext(SocketContext)
   const [rideDetails, setRideDetails] = useState(null)
-
-  socket.on('ride-ended',async (data)=>{
-    
-  })
 
   const fetchRideDetails = async () => {
     try {

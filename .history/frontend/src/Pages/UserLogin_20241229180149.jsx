@@ -31,9 +31,9 @@ const UserLogin = () => {
 
       setTimeout(()=>{
         setError(false);
+        toast('Logged In Successfully!')
         navigate('/user-home');
-      },2000)
-      toast('Logged In Successfully!')
+      },1500)
       return;
     } catch (error) {
       console.log(error)
@@ -105,7 +105,7 @@ const UserLogin = () => {
                 <button className=' text-white bg-green-500 w-[78%] p-2 rounded-lg flex flex-row items-center justify-center gap-2'>Login as Captain!</button>
               </Link>
             </div>
-            <ToastContainer position='bottom-center' theme='colored'/>
+            <ToastContainer className='text-green-400 bg-white'/>
           </div>
         </div>
       </div>

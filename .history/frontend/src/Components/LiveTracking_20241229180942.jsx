@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { LoadScript, GoogleMap, DirectionsService,DirectionsRenderer } from '@react-google-maps/api'
+import { LoadScript, GoogleMap } from '@react-google-maps/api'
 
 const containerStyle = {
     width: '100%',
@@ -11,9 +11,9 @@ const center = {
     lng: -38.523
 };
 
-const LiveTracking = ({rideDetails}) => {
+const LiveTracking = async () => {
     const [ currentPosition, setCurrentPosition ] = useState(center);
-    const [directions,setDirections] = useState(null)
+    // const {AdvancedMarkerElement} = await google.maps.importLibrary("marker");
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -54,33 +54,14 @@ const LiveTracking = ({rideDetails}) => {
 
     }, []);
 
-    useEffect(()=>{
-        if(rideDetails){
-            const directionsService = new google.maps.DirectionsService();
-            directionsService.route({
-                origin:rideDetails.pickup,
-                destination:rideDetails.destination,
-                travelMode:google.maps.TravelMode.DRIVING
-            }),
-            (result,status)=>{
-                if(status===google.maps.DirectionsStatus.OK){
-                    setDirections(result)
-                }else{
-                    console.error(`error fetching directions ${result}`)
-                }
-            }
-        }
-    },[rideDetails])
-
     return (
         <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={currentPosition}
                 zoom={15}
-                options={false}
             >
-                {directions && <DirectionsRenderer directions={directions} />}
+                {/* <AdvancedMarkerElement position={currentPosition}/> */}
             </GoogleMap>
         </LoadScript>
     )

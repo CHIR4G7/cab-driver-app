@@ -1,10 +1,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { FaLongArrowAltLeft } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
 import {apiRoutes} from '../utils/constants'
-import { ToastContainer, toast } from 'react-toastify';
 
 const UserSignUp = () => {
 
@@ -13,7 +12,6 @@ const UserSignUp = () => {
       mode: "onChange"
     }
   )
-  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -25,12 +23,7 @@ const UserSignUp = () => {
         },
         withCredentials:true
       })
-      // return response
-      setTimeout(()=>{
-        toast('You have been registered!')
-        
-      },2000)
-      navigate('/login')
+      return response
     } catch (error) {
       throw new Error(error)
     }
@@ -116,7 +109,7 @@ const UserSignUp = () => {
               <button className=' text-white bg-orange-500 w-[78%] p-2 rounded-lg flex flex-row items-center justify-center gap-2'>Go to Login </button>
             </Link>
           </div>
-         <ToastContainer/>
+         
         </div>
       </div>
     </div>

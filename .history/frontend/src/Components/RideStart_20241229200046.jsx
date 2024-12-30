@@ -3,16 +3,12 @@ import { RideDataContext } from '../context/RideContext'
 import { SocketContext } from '../context/SocketContext'
 import {UserDataContext} from '../context/UserContext'
 import { apiRoutes } from '../utils/constants'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 const RideStart = ({ride}) => {
 
     const {rideStarted,setRideStarted,setFinishRide} = useContext(RideDataContext)
     const {socket,sendMessage} = useContext(SocketContext)
     const {user} = useContext(UserDataContext)
-
-    const navigate = useNavigate();
 
     if(!ride){
       return <div>Loading...</div>
@@ -36,12 +32,11 @@ const RideStart = ({ride}) => {
           },
           withCredentials:true
         })
-        setFinishRide((prev)=>!prev)
       } catch (error) {
         console.log(error)
       throw new Error(error)
       }
-     
+      setFinishRide((prev)=>!prev)
     }
   
   return (

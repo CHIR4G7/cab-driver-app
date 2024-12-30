@@ -19,10 +19,6 @@ const CaptainRide = () => {
   const {socket} = useContext(SocketContext)
   const [rideDetails, setRideDetails] = useState(null)
 
-  socket.on('ride-ended',async (data)=>{
-    
-  })
-
   const fetchRideDetails = async () => {
     try {
       const url = `${import.meta.env.VITE_SERVER_BASE_URL}${apiRoutes.getRideInfo.path}`

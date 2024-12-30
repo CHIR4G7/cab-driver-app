@@ -60,7 +60,7 @@ const UserRide = () => {
       <div className='h-screen w-screen'>
         {/* <Map/> */}
         {/* <img src={mapimg} alt="" className='h-screen w-screen' /> */}
-        {rideDetails && <LiveTracking rideDetails={rideDetails}/>}
+        <LiveTracking/>
       </div>
 
       {/* Waiting for Driver */}

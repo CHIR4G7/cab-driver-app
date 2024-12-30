@@ -29,7 +29,7 @@ const HomePAge = () => {
                 </div>
             </div>
         </div>
-        <div className='hidden sm:block'>
+        <div className='sm:hidden block'>
         <div className='h-screen w-3/4 flex flex-col m-4 '>
             <span className='text-4xl'>
             This is PWA Application. Please Follow the Steps and download the PWA Application to use this app Thank You!

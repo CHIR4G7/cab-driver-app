@@ -31,8 +31,9 @@ const UserLogin = () => {
 
       setTimeout(()=>{
         setError(false);
+        
         navigate('/user-home');
-      },2000)
+      },1500)
       toast('Logged In Successfully!')
       return;
     } catch (error) {

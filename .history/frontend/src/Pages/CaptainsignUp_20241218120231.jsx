@@ -1,10 +1,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { FaLongArrowAltLeft } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { apiRoutes } from '../utils/constants';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
 
 const CaptainsignUp = () => {
 
@@ -16,8 +15,6 @@ const CaptainsignUp = () => {
       mode: "onChange"
     }
   )
-
-  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -42,11 +39,7 @@ const CaptainsignUp = () => {
         withCredentials:true
       })
       // console.log(response.data.token)
-      setTimeout(()=>{
-        navigate('/captain-login')
-      })
-      toast('Captain Registered Successfully!')
-      // return response;
+      return response;
     } catch (error) {
       console.log(error)
       throw new Error(error)
@@ -205,7 +198,7 @@ const CaptainsignUp = () => {
             </div>
 
           </form>
-                      <ToastContainer position='bottom-center' theme='colored'/>
+
         </div>
       </div>
     </div>

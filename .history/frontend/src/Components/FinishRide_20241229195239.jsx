@@ -17,7 +17,7 @@ const FinishRide = () => {
     const navigate = useNavigate();
 
     const handleDone = async ()=>{
-        
+
     }
 
     return (

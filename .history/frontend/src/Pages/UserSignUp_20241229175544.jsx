@@ -28,8 +28,7 @@ const UserSignUp = () => {
       // return response
       setTimeout(()=>{
         toast('You have been registered!')
-        
-      },2000)
+      })
       navigate('/login')
     } catch (error) {
       throw new Error(error)
@@ -116,7 +115,7 @@ const UserSignUp = () => {
               <button className=' text-white bg-orange-500 w-[78%] p-2 rounded-lg flex flex-row items-center justify-center gap-2'>Go to Login </button>
             </Link>
           </div>
-         <ToastContainer/>
+         
         </div>
       </div>
     </div>

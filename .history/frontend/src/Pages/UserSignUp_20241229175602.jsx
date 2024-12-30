@@ -28,8 +28,7 @@ const UserSignUp = () => {
       // return response
       setTimeout(()=>{
         toast('You have been registered!')
-        
-      },2000)
+      },1500)
       navigate('/login')
     } catch (error) {
       throw new Error(error)

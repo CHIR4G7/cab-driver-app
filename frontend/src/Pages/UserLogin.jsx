@@ -1,22 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { apiRoutes } from '../utils/constants'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import Cookies from "js-cookie";
 
 const UserLogin = () => {
 
   const navigate = useNavigate();
   const [loginerror, setError] = useState(false)
   const [loading, setLoading] = useState(false);
+  const token = Cookies.get("user_token")
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm(
     {
       mode: "onChange"
     }
   )
+
 
 
   const onSubmit = async (data) => {

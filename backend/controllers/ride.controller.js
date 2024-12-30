@@ -7,6 +7,36 @@ const { sendMessageToSocketId } = require('../socket')
 const { validationResult } = require('express-validator')
 const { response } = require('express')
 
+
+const sendRideRequestsToCaptains = async (ride)=>{
+    const pickupCoordinate = await getAdressCoordinateService(ride.pickup);
+    const captainsInRadius = await getCaptainInRadiusService(pickupCoordinate.latitude,pickupCoordinate.longitude,2); //ride within 4 Km radius
+
+    captainsInRadius.map((captain)=>{
+        sendMessageToSocketId(captain.socketID,{
+            event:'new-ride',
+            data:ride
+        })
+    })
+}
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const notifyCaptainsUntilAccepted = async (rideId) => {
+    let rideAccepted = false;
+
+    while (!rideAccepted) {
+        const ride = await Ride.findById(rideId).populate('user');
+        if (ride.status === 'accepted') {
+            rideAccepted = true;
+            break;
+        }else if(ride.status === 'cancelled'){
+            break;
+        }
+        await sendRideRequestToCaptains(ride);
+        await delay(10000); // Delay of 10 seconds
+    }
+};
+
 const createRide = async (request, response, next) => {
 
     const { pickup, destination, vehicleType } = request.body
@@ -21,21 +51,22 @@ const createRide = async (request, response, next) => {
         response.status(201).json({ message: "New Ride Created", ride: ride })
 
         //remove otp
-        const rideForCaptain = await Ride.findById(ride._id).populate("user")
-        rideForCaptain.otp = ""
+        // const rideForCaptain = await Ride.findById(ride._id).populate("user")
+        // rideForCaptain.otp = ""
 
-        const pickupCoordinate = await getAdressCoordinateService(pickup);
+        // const pickupCoordinate = await getAdressCoordinateService(pickup);
 
-        const captainsInRadius = await getCaptainInRadiusService(pickupCoordinate.latitude,pickupCoordinate.longitude,2); //ride within 4 Km radius
+        // const captainsInRadius = await getCaptainInRadiusService(pickupCoordinate.latitude,pickupCoordinate.longitude,2); //ride within 4 Km radius
 
-        // console.log(captainsInRadius)
-        //get Socketids of al the captains in radius
-        captainsInRadius.map((captain)=>{
-            sendMessageToSocketId(captain.socketID,{
-                event:'new-ride',
-                data:rideForCaptain
-            })
-        })
+        // // console.log(captainsInRadius)
+        // //get Socketids of al the captains in radius
+        // captainsInRadius.map((captain)=>{
+        //     sendMessageToSocketId(captain.socketID,{
+        //         event:'new-ride',
+        //         data:rideForCaptain
+        //     })
+        // })
+        sendRideRequestsToCaptains(ride)
     } catch (error) {
         console.log(error.message)
         return response.status(500).json({ error: error.message })

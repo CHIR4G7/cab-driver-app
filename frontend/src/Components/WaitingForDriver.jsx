@@ -6,6 +6,7 @@ import { FaMoneyBillWave } from "react-icons/fa";
 import { FaSquare } from "react-icons/fa";
 import { Rings } from "react-loader-spinner"
 import { useNavigate } from 'react-router-dom';
+import { SocketContext } from '../context/SocketContext';
 
 const WaitingForDriver = ({ride}) => {
 
@@ -13,9 +14,16 @@ const WaitingForDriver = ({ride}) => {
 
     const { selecting, setSelecting, booking, setBooking, confirmRide, setConfirmRide, waitingForDriver, setWaitingForDriver } = useContext(RideDataContext)
 
+    const {sendMessage} = useContext(SocketContext)
+
     if(!ride)
     {
         return <div>Loading..</div>
+    }
+
+    const handleCancel = async ()=>{
+        sendMessage('cancel-ride',{rideId:ride._id})
+        navigate('/user-home')
     }
 
     return (
@@ -69,6 +77,9 @@ const WaitingForDriver = ({ride}) => {
                     </div>
                 </div>
             </div>
+            <button className='mt-3  text-white bg-black w-4/5 p-2 rounded-lg flex flex-row items-center justify-center gap-2'   
+            onClick={handleCancel}
+                    >Cancel</button>
 
         </div>
     )

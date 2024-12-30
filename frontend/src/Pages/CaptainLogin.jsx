@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { RotatingLines } from 'react-loader-spinner'
 import axios from 'axios';
 import { apiRoutes } from '../utils/constants';
 import Alert from '../Components/Alert'
+import Cookies from "js-cookie";
 
 const CaptainLogin = () => {
 
@@ -16,8 +17,11 @@ const CaptainLogin = () => {
     message:"Successfully Logged In Captain!",
     visible:false
   })
+  const token = Cookies.get("captain_token")
 
   const navigate = useNavigate();
+
+
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm(
     {

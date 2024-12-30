@@ -5,6 +5,7 @@ import UserProtectedRoute,{CaptainProtectedRoute} from './Pages/ProtectedRoute';
 import Map from './Components/Map';
 import UserRide from './Pages/UserRide';
 import CaptainRide from './Pages/CaptainRide';
+import GoogleMapsProvider from './context/GoogleMapsProvider';
 
 const HomePage = lazy(()=>import('./Pages/HomePage'))
 const UserLogin = lazy(()=>import('./Pages/UserLogin'))
@@ -45,7 +46,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/user-ride/:id',
-    element : <UserProtectedRoute><UserRide/></UserProtectedRoute>
+    element : <UserProtectedRoute>
+      
+        <UserRide/>
+        
+        </UserProtectedRoute>
   },
   {
     path: '/captain-ride/:id',

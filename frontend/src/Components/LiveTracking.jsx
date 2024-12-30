@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { LoadScript, GoogleMap, DirectionsService,DirectionsRenderer } from '@react-google-maps/api'
+import React, { useState, useEffect,useRef } from 'react'
+import { LoadScript,GoogleMap, DirectionsRenderer,Marker } from '@react-google-maps/api'
 
 const containerStyle = {
     width: '100%',
@@ -14,6 +14,7 @@ const center = {
 const LiveTracking = ({rideDetails}) => {
     const [ currentPosition, setCurrentPosition ] = useState(center);
     const [directions,setDirections] = useState(null)
+    const mapRef = useRef(null)
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -79,10 +80,12 @@ const LiveTracking = ({rideDetails}) => {
                 center={currentPosition}
                 zoom={15}
                 options={false}
+                onLoad={(map)=>(mapRef.current = map)}
             >
                 {directions && <DirectionsRenderer directions={directions} />}
+                <AdvancedMarker position={currentPosition} map={mapRef}/>
             </GoogleMap>
-        </LoadScript>
+       </LoadScript>
     )
 }
 

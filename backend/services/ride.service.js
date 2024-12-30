@@ -11,9 +11,9 @@ const getFareService = async (pickup, destination) => {
     const distanceTime = await getDirectionTimeService(pickup, destination)
 
     const fares = {
-        auto: baseFares.auto + (distanceTime.distance * perKmFares.auto) + (distanceTime.duration * perMinFares.auto),
-        car: baseFares.car + (distanceTime.distance * perKmFares.car) + (distanceTime.duration * perMinFares.car),
-        motorcycle: baseFares.motorcyle + (distanceTime.distance * perKmFares.motorcyle) + (distanceTime.duration * perMinFares.motorcyle),
+        auto: (baseFares.auto + (distanceTime.distance * perKmFares.auto) + (distanceTime.duration * perMinFares.auto)).toFixed(2),
+        car: (baseFares.car + (distanceTime.distance * perKmFares.car) + (distanceTime.duration * perMinFares.car)).toFixed(2),
+        motorcycle: (baseFares.motorcyle + (distanceTime.distance * perKmFares.motorcyle) + (distanceTime.duration * perMinFares.motorcyle)).toFixed(2),
     }
     return fares
 }

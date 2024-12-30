@@ -55,6 +55,10 @@ function initializeSocket (server){
             sendMessageToSocketId(userSocketID,{event:'ride-started-for-user',data:{ride:ride}})
         })
 
+        socket.on('cancel-ride',async (data)=>{
+            await Ride.findByIdAndUpdate(data.rideId,{status:'cancelled'})
+        })
+
         socket.on('disconnect',()=>{
             console.log(`${socket.id} disconnected!`)
         })

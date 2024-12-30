@@ -14,11 +14,7 @@ import axios from 'axios';
 
 const FinishRide = () => {
     const { finishRide } = useContext(RideDataContext)
-    const navigate = useNavigate();
 
-    const handleDone = async ()=>{
-        
-    }
 
     return (
         <div className={`${finishRide ? '' : 'hidden'} absolute bottom-0 w-full bg-white pb-6`}>
@@ -57,10 +53,9 @@ const FinishRide = () => {
                     <span className='mt-[0.9vh]'><FaExclamationCircle /></span>
                     <span>Payment Pending</span>
                 </div>
-                <button className='mt-3  text-white bg-black w-4/5 p-2 rounded-lg flex flex-row items-center justify-center gap-2'
-                        onClick={handleDone}
-
+                <button className='mt-3  text-white bg-black w-4/5 p-2 rounded-lg flex flex-row items-center justify-center gap-2'   
                     >Done</button>
+                                   
             </div>
 
         </div>

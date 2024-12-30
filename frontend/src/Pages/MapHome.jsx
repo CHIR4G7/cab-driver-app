@@ -152,7 +152,7 @@ const MapHome = () => {
           <span className='font-medium text-2xl'>Find a ride</span>
         </div>
 
-        <div className='flex flex-col gap-1 left-6 ' >
+        <div className='flex flex-col gap-1 left-6' >
           <div className='h-11 w-1 bg-black absolute top-[11vh] left-[5vh]' />
 
           <div>

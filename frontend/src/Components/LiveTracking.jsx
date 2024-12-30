@@ -1,5 +1,6 @@
 import React, { useState, useEffect,useRef } from 'react'
 import { LoadScript,GoogleMap, DirectionsRenderer,Marker } from '@react-google-maps/api'
+import AdvancedMarker from './AdvanceMarker';
 
 const containerStyle = {
     width: '100%',
@@ -57,6 +58,7 @@ const LiveTracking = ({rideDetails}) => {
 
     useEffect(()=>{
         if(rideDetails){
+            console.log(rideDetails)
             const directionsService = new google.maps.DirectionsService();
             directionsService.route({
                 origin:rideDetails.pickup,
@@ -83,7 +85,8 @@ const LiveTracking = ({rideDetails}) => {
                 onLoad={(map)=>(mapRef.current = map)}
             >
                 {directions && <DirectionsRenderer directions={directions} />}
-                <AdvancedMarker position={currentPosition} map={mapRef}/>
+                {/* {console.log(currentPosition)} */}
+            {mapRef && <Marker position={currentPosition} map={mapRef.current}/>}
             </GoogleMap>
        </LoadScript>
     )
